@@ -1,0 +1,2 @@
+//run the server and specify the public folder as web root
+php -S localhost:8000 -t public
