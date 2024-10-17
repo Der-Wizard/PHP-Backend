@@ -19,7 +19,7 @@ try {
     unsubscribeToNewsletter($conn, $posted_email);
     
 } catch (Exception $e) {
-    echoWithError("Unknown error occured.");
+    echoResponse("Unknown error occured.",'500');
     die("Some unknown error occured during processing!");
 }
 
@@ -37,9 +37,9 @@ function unsubscribeToNewsletter($conn, $posted_email)
 
     
     if ($stmt->execute()) {
-        echoWithSuccess('Unsubscribed successfully!');
+        echoResponse('Unsubscribed successfully!','201');
     } else {
-        echoWithError('Failed to unsubscribe. Please reload and try again');
+        echoResponse('Failed to unsubscribe. Please reload and try again','500');
     }
 
     $stmt->close();

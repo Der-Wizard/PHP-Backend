@@ -20,7 +20,7 @@ try {
 
     subscribeToNewsletter($conn, $posted_email);
 } catch (Exception $e) {
-    echoWithError("Unknown error occured.");
+    echoResponse("Unknown error occured.",'500');
     die("Some unknown error occured during processing!");
 }
 
@@ -45,7 +45,7 @@ function handleAlreadySubscribed($conn, $posted_email)
     $check_stmt->close();
 
     if (isset($count) && $count > 0) {
-        echoWithSuccess('You are already subscribed!');
+        echoResponse('You are already subscribed!','200');
         $conn->close();
         die;
     }
@@ -58,9 +58,9 @@ function subscribeToNewsletter($conn, $posted_email)
     $stmt->bind_param("s", $email);
 
     if ($stmt->execute()) {
-        echoWithSuccess('Subscription successfully!');
+        echoResponse('Subscription successfully!','201');
     } else {
-        echoWithError('Failed to subscribe.');
+        echoResponse('Failed to subscribe.','500');
     }
 
     $stmt->close();

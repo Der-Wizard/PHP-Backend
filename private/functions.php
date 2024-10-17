@@ -2,41 +2,34 @@
 function handlePostArgumentNotProvided(string $argument, string $errorMessage)
 {
     if (!isset($_POST[$argument])) {
-        echoWithError($errorMessage);
+        echoResponse($errorMessage, '400');
         exit;
     }
 }
 function handleGetArgumentNotProvided(string $argument, string $errorMessage)
 {
     if (!isset($_GET[$argument])) {
-        echoWithError($errorMessage);
+        echoResponse($errorMessage, '400');
         exit;
     }
 }
 function handleEmailInValid(string $email)
 {
     if (empty($email)) {
-        echoWithError('No email provided');
+        echoResponse('No email provided','400');
         exit;
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echoWithError('Invalid email format');
+        echoResponse('Invalid email format', '400');
         exit;
     }
 }
-function echoWithSuccess($message)
+function echoResponse($message, $response_code)
 {
-    echoResponse('success', $message);
-}
-function echoWithError($message)
-{
-    echoResponse('error', $message);
-}
-function echoResponse($status, $message)
-{
+    http_response_code($response_code);
     echo json_encode([
-        'status' => $status,
+        'code' => $response_code,
         'message' => $message
     ]);
 }

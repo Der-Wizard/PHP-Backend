@@ -9,7 +9,7 @@ function createConnection()
     $conn = new mysqli($host, $username, $password, $database, 3006);
 
     if ($conn->connect_error) {
-        echoWithError('Connection failed: ' . $conn->connect_error);
+        echoResponse('Connection failed: ' . $conn->connect_error,'500');
         die;
     }
     return $conn;
