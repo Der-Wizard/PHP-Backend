@@ -83,7 +83,7 @@ function generate_jwt($user_id, $user_email)
     $secret_key = $_ENV['JWT_SECRET'];
     $issuer_claim = 'localhost';
     $issued_at = time();
-    $expiration_time = $issued_at + 3600;
+    $expiration_time = $issued_at + (30 * 24 * 60 * 60);
     $payload = array(
         "iss" => $issuer_claim,
         "iat" => $issued_at,
@@ -99,11 +99,11 @@ function generate_jwt($user_id, $user_email)
 
 function set_jwt_cookie($jwt) {
     setcookie('jwt_token', $jwt, [
-        'expires' => time() + 3600,
+        'expires' => time() + (30 * 24 * 60 * 60),
         'path' => '/',
-        'domain' => 'localhost',
+        'domain' => '',
         'secure' => false,
         'httponly' => true,
-        'samesite' => 'Strict',
+        'samesite' => 'Lax',
     ]);
 }
