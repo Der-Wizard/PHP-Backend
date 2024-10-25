@@ -1,8 +1,8 @@
-Anforderungen:
+#Anforderungen:
 Windows 11
 Visual Studio Code
 
-PHP installiert mit version 8.13.12:
+#PHP installiert mit version 8.13.12:
 
     https://windows.php.net/download/
 
@@ -16,16 +16,31 @@ PHP installiert mit version 8.13.12:
     extension=mysqli
     extension=openssl
     extension=zip
+    extension=curl
+    extension=mbstring
 
   Unter System Properties > Environment Variables => unter Pfad muss `C:\php` hinzugefügt werden
 
+
+
+#Composer muss installiert sein:
+
+unter folgender Seite auf Download drücken:
+
+        https://getcomposer.org
+
+Hier den WindowsInstaller 'Composer-Setup.exe' installieren und mit Standard Einstellungen
+
+Version: 2.8.1
+
     
-MySQL Server der auf Port 3006 läuft:
+#MySQL Server der auf Port 3006 läuft:
 
     https://dev.mysql.com/downloads/installer/
 
     Version 8.0.40
     Microsoft Windows
+    
 Hier die (mysql-installer-community-8.0.40.0.msi) mit 306.4M auswählen
 
 Hier müssen alle Produkte ausgewählt und erstellt werden mit folgenden Werten:
@@ -42,5 +57,9 @@ MySQL Server:
 
 Alle Dateien aus dem Main Branch pullen und lokal abspeichern
 SQL Datei DUMP20241017.sql aus dem Verzeichnis PHP-BACKEDN/private kopieren und in MySQL ausführen
+
+folgenden Befehl ausführen um alle Packages zu installieren:
+
+        composer install
 
 Server starten mit folgendem Befehl: php -S localhost:8000 -t public
